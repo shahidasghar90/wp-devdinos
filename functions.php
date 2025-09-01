@@ -6,6 +6,14 @@ function my_custom_theme_enqueue_scripts() {
     wp_enqueue_script('wow-js', get_template_directory_uri() . '/assets/js/wow.min.js', array(), null, true);
     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array(), null, true);
     wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', array(), null, true);
+
+      $logo_urls = array(
+        'default' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-light.png',
+        'default_dark' => get_template_directory_uri() . '/assets/images/logo-devdinos-dark.png',
+        'sticky' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png',
+        'sticky_dark' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png'
+    );
+    wp_localize_script('main-js', 'devdinosLogos', $logo_urls);
 }
 add_action('wp_enqueue_scripts', 'my_custom_theme_enqueue_scripts');
 
@@ -30,6 +38,20 @@ function add_menu_li_classes($classes, $item, $args) {
   return $classes;
 }
 add_filter('nav_menu_css_class', 'add_menu_li_classes', 10, 3);
+
+function devdinos_theme_support() {
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support( 'custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'header-text' => array( 'site-title', 'site-description' ),
+    ) );
+}
+add_action('after_setup_theme', 'devdinos_theme_support');
+
 
 function devdinos_customize_register($wp_customize) {
   // Hero Section

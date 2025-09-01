@@ -15,8 +15,12 @@
       <div class="container px-4 mx-auto">
         <div class="relative flex items-center justify-between -mx-4">
           <div class="max-w-full px-4 w-60">
-            <a href="<?php echo home_url(); ?>" class="block w-full py-5 navbar-logo">
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo/logo-white.svg" alt="logo" class="w-full header-logo" />
+             <a href="<?php echo home_url(); ?>" class="block w-full py-5 navbar-logo">
+              <?php if (has_custom_logo()) {
+                the_custom_logo();
+              } else { ?>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo/logo-devdinos-dark.png" alt="logo" class="w-full header-logo" />
+              <?php } ?>
             </a>
           </div>
           <div class="flex items-center justify-between w-full px-4">

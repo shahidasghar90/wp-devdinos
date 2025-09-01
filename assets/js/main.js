@@ -1,38 +1,46 @@
 (function () {
   "use strict";
 
+  // ======= a function to update logo
+  function updateLogo() {
+    const defaultLogo = document.querySelector(".header-logo");
+    const ud_header = document.querySelector(".ud-header");
+
+    if (defaultLogo && ud_header) {
+        const isDarkMode = document.documentElement.classList.contains("dark");
+        const isSticky = ud_header.classList.contains("sticky");
+
+        if (isDarkMode) {
+            if (isSticky) {
+                defaultLogo.src = devdinosLogos.sticky_dark;
+            } else {
+                defaultLogo.src = devdinosLogos.default_dark;
+            }
+        } else { // Light mode
+            if (isSticky) {
+                defaultLogo.src = devdinosLogos.sticky;
+            } else {
+                defaultLogo.src = devdinosLogos.default;
+            }
+        }
+    }
+  }
+
+
   // ======= Sticky
   window.onscroll = function () {
     const ud_header = document.querySelector(".ud-header");
     const sticky = ud_header.offsetTop;
-    const logo = document.querySelectorAll(".header-logo");
 
-    if (window.pageYOffset > sticky) {
-      ud_header.classList.add("sticky");
-    } else {
-      ud_header.classList.remove("sticky");
-    }
-
-    if(logo.length) {
-      // === logo change
-      if (ud_header.classList.contains("sticky")) {
-        document.querySelector(".header-logo").src =
-          "assets/images/logo/logo.svg"
+    if (ud_header) {
+      if (window.pageYOffset > sticky) {
+        ud_header.classList.add("sticky");
       } else {
-        document.querySelector(".header-logo").src =
-          "assets/images/logo/logo-white.svg"
+        ud_header.classList.remove("sticky");
       }
     }
 
-    if (document.documentElement.classList.contains("dark")) {
-      if(logo.length) {
-        // === logo change
-        if (ud_header.classList.contains("sticky")) {
-          document.querySelector(".header-logo").src =
-            "assets/images/logo/logo-white.svg"
-        } 
-      }
-    }
+    updateLogo();
 
     // show or hide the back-top-top button
     const backToTop = document.querySelector(".back-to-top");
@@ -45,45 +53,6 @@
       backToTop.style.display = "none";
     }
   };
-
-  // ===== responsive navbar
-  let navbarToggler = document.querySelector("#navbarToggler");
-  const navbarCollapse = document.querySelector("#navbarCollapse");
-
-  navbarToggler.addEventListener("click", () => {
-    navbarToggler.classList.toggle("navbarTogglerActive");
-    navbarCollapse.classList.toggle("hidden");
-  });
-
-  //===== close navbar-collapse when a  clicked
-  document
-    .querySelectorAll("#navbarCollapse ul li:not(.submenu-item) a")
-    .forEach((e) =>
-      e.addEventListener("click", () => {
-        navbarToggler.classList.remove("navbarTogglerActive");
-        navbarCollapse.classList.add("hidden");
-      })
-    );
-
-  // ===== Sub-menu
-  const submenuItems = document.querySelectorAll(".submenu-item");
-  submenuItems.forEach((el) => {
-    el.querySelector("a").addEventListener("click", () => {
-      el.querySelector(".submenu").classList.toggle("hidden");
-    });
-  });
-
-  // ===== Faq accordion
-  const faqs = document.querySelectorAll(".single-faq");
-  faqs.forEach((el) => {
-    el.querySelector(".faq-btn").addEventListener("click", () => {
-      el.querySelector(".icon").classList.toggle("rotate-180");
-      el.querySelector(".faq-content").classList.toggle("hidden");
-    });
-  });
-
-  // ===== wow js
-  new WOW().init();
 
   // ====== scroll top js
   function scrollTo(element, to = 0, duration = 500) {
@@ -118,41 +87,48 @@
     scrollTo(document.documentElement);
   };
 
-    /* ========  themeSwitcher start ========= */
+  // ====== theme switcher
+  const themeSwitcher = document.getElementById("themeSwitcher");
 
-  // themeSwitcher
-  const themeSwitcher = document.getElementById('themeSwitcher');
+  // themeSwitcher.addEventListener("click", () => {
+  //   themeSwitcher.classList.toggle("active");
+  // });
 
   // Theme Vars
-  const userTheme = localStorage.getItem('theme');
-  const systemTheme = window.matchMedia('(prefers-color0scheme: dark)').matches;
+  const userTheme = localStorage.getItem("theme");
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   // Initial Theme Check
   const themeCheck = () => {
-    if (userTheme === 'dark' || (!userTheme && systemTheme)) {
-      document.documentElement.classList.add('dark');
+    if (userTheme === "dark" || (!userTheme && systemTheme)) {
+      document.documentElement.classList.add("dark");
       return;
     }
   };
 
   // Manual Theme Switch
   const themeSwitch = () => {
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      return;
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     }
-
-    document.documentElement.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
+    updateLogo();
   };
 
   // call theme switch on clicking buttons
-  themeSwitcher.addEventListener('click', () => {
-    themeSwitch();
-  });
+  if(themeSwitcher) {
+    themeSwitcher.addEventListener("click", () => {
+      themeSwitch();
+    });
+  }
 
   // invoke theme check on initial load
   themeCheck();
-  /* ========  themeSwitcher End ========= */
+
+  // initial logo update
+  updateLogo();
+
 })();
