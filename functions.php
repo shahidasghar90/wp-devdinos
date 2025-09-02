@@ -496,6 +496,7 @@ function devdinos_customize_register($wp_customize) {
             'step' => 1,
         ),
     ));
+
     // Testimonials Section
     $wp_customize->add_section('testimonial_section', array(
         'title'    => __('Testimonials Section', 'devdinos'),
@@ -568,6 +569,82 @@ function devdinos_customize_register($wp_customize) {
 }
 add_action('customize_register', 'devdinos_customize_register');
 
+// Custom Post Type for Testimonials
+function create_testimonial_post_type() {
+    register_post_type('testimonial',
+        array(
+            'labels'      => array(
+                'name'          => __('Testimonials'),
+                'singular_name' => __('Testimonial'),
+            ),
+            'public'      => true,
+            'has_archive' => true,
+            'rewrite'     => array('slug' => 'testimonials'),
+            'show_in_rest' => true,
+            'supports'    => array('title', 'editor', 'thumbnail', 'custom-fields'),
+            'menu_icon'   => 'dashicons-format-quote',
+        )
+    );
+}
+add_action('init', 'create_testimonial_post_type');
+
+// Add meta box for testimonial rating
+function testimonial_add_meta_box() {
+    add_meta_box(
+        'testimonial_rating',
+        __('Testimonial Rating', 'devdinos'),
+        'testimonial_rating_callback',
+        'testimonial',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'testimonial_add_meta_box');
+
+// Callback function to display the rating input field
+function testimonial_rating_callback($post) {
+    wp_nonce_field('testimonial_save_meta_box_data', 'testimonial_meta_box_nonce');
+    $value = get_post_meta($post->ID, '_testimonial_rating', true);
+    echo '<label for="testimonial_rating_field">';
+    _e('Rating (1-5):', 'devdinos');
+    echo '</label> ';
+    echo '<input type="number" id="testimonial_rating_field" name="testimonial_rating_field" value="' . esc_attr($value) . '" size="25" min="1" max="5" />';
+}
+
+// Save meta box data
+function testimonial_save_meta_box_data($post_id) {
+    if (!isset($_POST['testimonial_meta_box_nonce'])) {
+        return;
+    }
+    if (!wp_verify_nonce($_POST['testimonial_meta_box_nonce'], 'testimonial_save_meta_box_data')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (isset($_POST['post_type']) && 'testimonial' == $_POST['post_type']) {
+        if (!current_user_can('edit_page', $post_id)) {
+            return;
+        }
+    } else {
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+    }
+    if (!isset($_POST['testimonial_rating_field'])) {
+        return;
+    }
+    $rating = intval($_POST['testimonial_rating_field']);
+    if ($rating >= 1 && $rating <= 5) {
+        update_post_meta($post_id, '_testimonial_rating', $rating);
+    } else {
+        delete_post_meta($post_id, '_testimonial_rating');
+    }
+}
+add_action('save_post', 'testimonial_save_meta_box_data');
+
+
+
 // Custom Post Type for Projects
 function create_project_post_type() {
   register_post_type('project',
@@ -601,23 +678,5 @@ function create_project_taxonomy() {
 }
 add_action('init', 'create_project_taxonomy');
 
-// Custom Post Type for Testimonials
-function create_testimonial_post_type() {
-  register_post_type('testimonial',
-    array(
-      'labels' => array(
-        'name' => __('Testimonials'),
-        'singular_name' => __('Testimonial')
-      ),
-      'public' => true,
-      'has_archive' => true,
-      'rewrite' => array('slug' => 'testimonials'),
-      'show_in_rest' => true,
-      'supports' => array('title', 'editor', 'thumbnail'), // Title = Author, Editor = Quote, Thumbnail = Author Image
-      'menu_icon'   => 'dashicons-testimonial',
-    )
-  );
-}
-add_action('init', 'create_testimonial_post_type');
 
 ?>
