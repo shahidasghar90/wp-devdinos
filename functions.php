@@ -19,6 +19,12 @@ add_action('wp_enqueue_scripts', 'my_custom_theme_enqueue_scripts');
 
 function register_my_menu() {
   register_nav_menu('primary', __('Primary Menu'));
+  register_nav_menu('footer_about', __('Footer About Us Menu'));
+  register_nav_menu('footer_products', __('Footer Products Menu'));
+  register_nav_menu('footer_features', __('Footer Features Menu')); 
+  register_nav_menu('footer_blog_post', __('Footer Blog Post Menu'));
+  register_nav_menu('footer_bottom_bar', __('Footer Bottom Bar Menu'));
+
 }
 add_action('init', 'register_my_menu');
 
@@ -29,6 +35,28 @@ function add_menu_link_classes($atts, $item, $args) {
   return $atts;
 }
 add_filter('nav_menu_link_attributes', 'add_menu_link_classes', 10, 3);
+
+class Footer_Menu_Walker extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $output .= "<li>";
+        $output .= '<a href="' . esc_url($item->url) . '" class="inline-block mb-3 text-base text-gray-7 hover:text-primary">';
+        $output .= esc_html($item->title);
+        $output .= '</a>';
+        $output .= "</li>";
+    }
+}
+
+class Footer_Bottom_Bar_Walker extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $output .= '<a href="' . esc_url($item->url) . '" class="px-3 text-base text-gray-7 hover:text-white hover:underline">';
+        $output .= esc_html($item->title);
+        $output .= '</a>';
+    }
+
+    function end_el(&$output, $item, $depth = 0, $args = null) {
+        // This walker does not need to output a closing </li> tag
+    }
+}
 
 function add_menu_li_classes($classes, $item, $args) {
   if (isset($args->theme_location) && $args->theme_location === 'primary') {
@@ -936,7 +964,80 @@ for ($i = 1; $i <= 5; $i++) {
       'section' => 'footer_brands_section',
       'type' => 'url',
     ));
+
+     // Footer Section
+  $wp_customize->add_section('footer_section', array(
+    'title' => __('Footer', 'devdinos'),
+    'priority' => 200,
+  ));
+
+  // Footer Logo
+  $wp_customize->add_setting('footer_logo');
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo', array(
+    'label' => __('Footer Logo', 'devdinos'),
+    'section' => 'footer_section',
+    'settings' => 'footer_logo',
+  )));
+
+  // Footer Description
+  $wp_customize->add_setting('footer_description', array(
+    'default' => 'We create digital experiences for brands and companies by using technology.',
+    'sanitize_callback' => 'wp_kses_post',
+  ));
+  $wp_customize->add_control('footer_description', array(
+    'label' => __('Footer Description', 'devdinos'),
+    'section' => 'footer_section',
+    'type' => 'textarea',
+  ));
+
+  // Social Links
+    $socials = array('facebook', 'twitter', 'instagram', 'linkedin');
+    foreach ($socials as $social) {
+        $wp_customize->add_setting("footer_social_{$social}_url", array(
+            'default' => '#',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+        $wp_customize->add_control("footer_social_{$social}_url", array(
+            'label' => __(ucfirst($social) . ' URL', 'devdinos'),
+            'section' => 'footer_section',
+            'type' => 'url',
+        ));
+    }
+
   }
+
+    // Copyright Text
+    $wp_customize->add_setting('footer_copyright_text', array(
+        'default' => 'Designed and Developed by',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('footer_copyright_text', array(
+        'label' => __('Copyright Text', 'devdinos'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+
+    // Copyright Link Text
+    $wp_customize->add_setting('footer_copyright_link_text', array(
+        'default' => 'TailGrids and UIdeck',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('footer_copyright_link_text', array(
+        'label' => __('Copyright Link Text', 'devdinos'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+
+    // Copyright Link URL
+    $wp_customize->add_setting('footer_copyright_link_url', array(
+        'default' => 'https://tailgrids.com',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('footer_copyright_link_url', array(
+        'label' => __('Copyright Link URL', 'devdinos'),
+        'section' => 'footer_section',
+        'type' => 'url',
+    ));
 }
 add_action('customize_register', 'devdinos_customize_register');
 
