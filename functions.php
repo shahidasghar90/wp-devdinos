@@ -1,5 +1,5 @@
 <?php
-function my_custom_theme_enqueue_scripts() {
+function devdinos_theme_enqueue_scripts() {
     wp_enqueue_style('swiper', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css');
     wp_enqueue_style('animate', get_template_directory_uri() . '/assets/css/animate.css');
     wp_enqueue_style('tailwind', get_template_directory_uri() . '/src/css/tailwind.css');
@@ -15,7 +15,7 @@ function my_custom_theme_enqueue_scripts() {
     );
     wp_localize_script('main-js', 'devdinosLogos', $logo_urls);
 }
-add_action('wp_enqueue_scripts', 'my_custom_theme_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'devdinos_theme_enqueue_scripts');
 
 function register_my_menu() {
   register_nav_menu('primary', __('Primary Menu'));
