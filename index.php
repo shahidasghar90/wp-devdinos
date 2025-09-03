@@ -1053,9 +1053,9 @@
     </section>
 
      <!-- ====== Blog Section end -->
-
-
+    
     <!-- ====== Contact Start ====== -->
+     <!-- ====== Contact Start ====== -->
     <section id="contact" class="relative py-20 md:py-[120px]">
       <div class="absolute top-0 left-0 w-full h-full -z-1 dark:bg-dark"></div>
       <div
@@ -1069,12 +1069,12 @@
                 <span
                   class="block mb-6 text-base font-medium text-dark dark:text-white"
                 >
-                  CONTACT US
+                  <?php echo get_theme_mod('contact_subtitle', 'CONTACT US'); ?>
                 </span>
                 <h2
                   class="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white"
                 >
-                  Let's talk about your problem.
+                  <?php echo get_theme_mod('contact_title', 'Let\'s talk about your problem.'); ?>
                 </h2>
               </div>
               <div class="flex flex-wrap justify-between mb-12 lg:mb-0">
@@ -1101,7 +1101,7 @@
                       Our Location
                     </h5>
                     <p class="text-base text-body-color dark:text-dark-6">
-                      401 Broadway, 24th Floor, Orchard Cloud View, London
+                      <?php echo get_theme_mod('contact_location', '401 Broadway, 24th Floor, Orchard Cloud View, London'); ?>
                     </p>
                   </div>
                 </div>
@@ -1125,10 +1125,10 @@
                       How Can We Help?
                     </h5>
                     <p class="text-base text-body-color dark:text-dark-6">
-                      info@yourdomain.com
+                      <?php echo get_theme_mod('contact_email_1', 'info@yourdomain.com'); ?>
                     </p>
                     <p class="mt-1 text-base text-body-color dark:text-dark-6">
-                      contact@yourdomain.com
+                      <?php echo get_theme_mod('contact_email_2', 'contact@yourdomain.com'); ?>
                     </p>
                   </div>
                 </div>
@@ -1141,6 +1141,18 @@
               data-wow-delay=".2s
               "
             >
+               <?php
+                $contact_form_shortcode = get_theme_mod('contact_form_shortcode');
+                $contact_form_css = get_theme_mod('contact_form_css');
+
+                if (!empty($contact_form_css)) {
+                    echo '<style>' . $contact_form_css . '</style>';
+                }
+
+                if (!empty($contact_form_shortcode)) :
+                    echo do_shortcode($contact_form_shortcode);
+                else :
+              ?>
               <h3
                 class="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]"
               >
@@ -1157,7 +1169,7 @@
                     type="text"
                     name="fullName"
                     placeholder="Adam Gelius"
-                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-hidden dark:border-dark-3 dark:text-dark-6"
+                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-[22px]">
@@ -1170,7 +1182,7 @@
                     type="email"
                     name="email"
                     placeholder="example@yourmail.com"
-                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-hidden dark:border-dark-3 dark:text-dark-6"
+                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-[22px]">
@@ -1183,7 +1195,7 @@
                     type="text"
                     name="phone"
                     placeholder="+885 1254 5211 552"
-                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-hidden dark:border-dark-3 dark:text-dark-6"
+                    class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-[30px]">
@@ -1194,26 +1206,28 @@
                   >
                   <textarea
                     name="message"
-                    rows="1"
+                    rows="4"
                     placeholder="type your message here"
-                    class="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-hidden dark:border-dark-3 dark:text-dark-6"
+                    class="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   ></textarea>
                 </div>
                 <div class="mb-0">
                   <button
                     type="submit"
-                    class="inline-flex items-center justify-center px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out rounded-md bg-primary hover:bg-blue-dark"
+                    class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-primary hover:bg-blue-dark"
                   >
-                    Send
+                    Send Message
                   </button>
                 </div>
               </form>
+              <?php endif; ?>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- ====== Contact End ====== -->
+    <!-- ====== Contact end ====== -->
+    
 
     <!-- ====== Brands Section Start -->
     <section class="pb-20 dark:bg-dark">

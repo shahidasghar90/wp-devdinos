@@ -689,6 +689,190 @@ function devdinos_customize_register($wp_customize) {
           'step' => 1,
       ),
   ));
+
+  // Contact Section
+  $wp_customize->add_section('contact_section', array(
+    'title' => __('Contact Section', 'devdinos'),
+    'priority' => 37,
+  ));
+
+  // Contact Subtitle
+  $wp_customize->add_setting('contact_subtitle', array(
+    'default' => 'CONTACT US',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_subtitle', array(
+    'label' => __('Subtitle', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  // Contact Title
+  $wp_customize->add_setting('contact_title', array(
+    'default' => 'Let\'s talk about your problem.',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_title', array(
+    'label' => __('Title', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  // Location Title
+  $wp_customize->add_setting('contact_location_title', array(
+    'default' => 'Our Location',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_location_title', array(
+    'label' => __('Location Title', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  // Location Address
+  $wp_customize->add_setting('contact_location_address', array(
+    'default' => '401 Broadway, 24th Floor, Orchard Cloud View, London',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_location_address', array(
+    'label' => __('Location Address', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  // Help Title
+  $wp_customize->add_setting('contact_help_title', array(
+    'default' => 'How Can We Help?',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_help_title', array(
+    'label' => __('Help Title', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  // Help Email 1
+  $wp_customize->add_setting('contact_help_email_1', array(
+    'default' => 'info@yourdomain.com',
+    'sanitize_callback' => 'sanitize_email',
+  ));
+  $wp_customize->add_control('contact_help_email_1', array(
+    'label' => __('Help Email 1', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'email',
+  ));
+
+  // Help Email 2
+  $wp_customize->add_setting('contact_help_email_2', array(
+    'default' => 'contact@yourdomain.com',
+    'sanitize_callback' => 'sanitize_email',
+  ));
+  $wp_customize->add_control('contact_help_email_2', array(
+    'label' => __('Help Email 2', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'email',
+  ));
+
+  // Form Title
+  $wp_customize->add_setting('contact_form_title', array(
+    'default' => 'Send us a Message',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_form_title', array(
+    'label' => __('Form Title', 'devdinos'),
+    'section' => 'contact_section',
+    'type' => 'text',
+  ));
+
+  $wp_customize->add_setting('contact_form_shortcode', array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('contact_form_shortcode', array(
+      'label' => __('Contact Form 7 Shortcode', 'devdinos'),
+      'section' => 'contact_section',
+      'description' => __('If you leave this empty, the default form will be shown.', 'devdinos'),
+      'type' => 'text',
+  ));
+
+     $default_cf7_css = '
+.wpcf7-form .wpcf7-form-control-wrap {
+  display: block;
+  margin-bottom: 22px;
+}
+
+.wpcf7-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #637381;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: transparent;
+  padding-bottom: 0.75rem;
+  color: #637381;
+}
+
+.wpcf7-form input[type="text"]::placeholder,
+.wpcf7-form input[type="email"]::placeholder,
+.wpcf7-form input[type="tel"]::placeholder,
+.wpcf7-form textarea::placeholder {
+  color: rgba(99, 115, 129, 0.6);
+}
+
+.wpcf7-form input[type="text"]:focus,
+.wpcf7-form input[type="email"]:focus,
+.wpcf7-form input[type="tel"]:focus,
+.wpcf7-form textarea:focus {
+  border-bottom-color: #366BFF;
+  outline: none;
+}
+
+.wpcf7-form textarea {
+  resize: none;
+}
+
+.wpcf7-form .wpcf7-submit {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid #366BFF;
+  border-radius: 5px;
+  background-color: #366BFF;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.wpcf7-form .wpcf7-submit:hover {
+  background-color: #ffffff;
+  color: #366BFF;
+}
+';
+
+  // Contact Form Custom CSS
+
+  $wp_customize->add_setting('contact_form_css', array(
+      'default' => $default_cf7_css,
+      'sanitize_callback' => 'wp_strip_all_tags'
+  ));
+
+  $wp_customize->add_control('contact_form_css', array(
+      'label' => __('Contact Form 7 Custom CSS', 'devdinos'),
+      'section' => 'contact_section',
+      'description' => __('Add custom CSS to style your Contact Form 7. The styles will be applied to the form on the contact page.', 'devdinos'),
+      'type' => 'textarea',
+  ));
 }
 add_action('customize_register', 'devdinos_customize_register');
 
