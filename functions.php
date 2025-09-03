@@ -635,6 +635,60 @@ function devdinos_customize_register($wp_customize) {
         'settings'   => 'faq_section_svg',
         'type'       => 'textarea',
     ));
+
+    // Blog Section
+  $wp_customize->add_section('blog_section', array(
+    'title' => __('Blog Section', 'devdinos'),
+    'priority' => 36,
+  ));
+
+  // Blog Subtitle
+  $wp_customize->add_setting('blog_subtitle', array(
+    'default' => 'Our Blogs',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('blog_subtitle', array(
+    'label' => __('Subtitle', 'devdinos'),
+    'section' => 'blog_section',
+    'type' => 'text',
+  ));
+
+  // Blog Title
+  $wp_customize->add_setting('blog_title', array(
+    'default' => 'Our Recent News',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('blog_title', array(
+    'label' => __('Title', 'devdinos'),
+    'section' => 'blog_section',
+    'type' => 'text',
+  ));
+
+  // Blog Description
+  $wp_customize->add_setting('blog_description', array(
+    'default' => 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.',
+    'sanitize_callback' => 'wp_kses_post',
+  ));
+  $wp_customize->add_control('blog_description', array(
+    'label' => __('Description', 'devdinos'),
+    'section' => 'blog_section',
+    'type' => 'textarea',
+  ));
+
+  // Number of posts to display
+  $wp_customize->add_setting('blog_posts_per_page', array(
+      'default'           => 3,
+      'sanitize_callback' => 'absint',
+  ));
+  $wp_customize->add_control('blog_posts_per_page', array(
+      'label'       => __('Number of Posts to Show', 'devdinos'),
+      'section'     => 'blog_section',
+      'type'        => 'number',
+      'input_attrs' => array(
+          'min'  => 1,
+          'step' => 1,
+      ),
+  ));
 }
 add_action('customize_register', 'devdinos_customize_register');
 
