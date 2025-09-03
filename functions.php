@@ -873,6 +873,70 @@ function devdinos_customize_register($wp_customize) {
       'description' => __('Add custom CSS to style your Contact Form 7. The styles will be applied to the form on the contact page.', 'devdinos'),
       'type' => 'textarea',
   ));
+
+  // Footer Brands Section
+  $wp_customize->add_section('footer_brands_section', array(
+    'title' => __('Footer Brands', 'devdinos'),
+    'priority' => 150, // Adjusted priority to appear after other sections
+  ));
+
+  // Show/Hide Footer Brands Section
+  $wp_customize->add_setting('footer_brands_section_show', array(
+    'default' => 1,
+    'sanitize_callback' => 'absint'
+  ));
+  $wp_customize->add_control('footer_brands_section_show', array(
+    'label' => __('Show Footer Brands Section', 'devdinos'),
+    'section' => 'footer_brands_section',
+    'type' => 'checkbox',
+  ));
+
+  // Footer Brands Title
+  $wp_customize->add_setting('footer_brands_title', array(
+    'default' => 'Built with latest technology',
+    'sanitize_callback' => 'sanitize_text_field',
+  ));
+  $wp_customize->add_control('footer_brands_title', array(
+    'label' => __('Footer Brands Section Title', 'devdinos'),
+    'section' => 'footer_brands_section',
+    'type' => 'text',
+  ));
+
+  // Loop for 5 brands
+for ($i = 1; $i <= 5; $i++) {
+    // Brand Image
+    $wp_customize->add_setting("footer_brand_image_$i", array(
+      'default' => get_template_directory_uri() . "/assets/images/brands/brand-0{$i}.svg",
+      'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "footer_brand_image_$i", array(
+      'label' => __("Brand Image $i (Light)", 'devdinos'),
+      'section' => 'footer_brands_section',
+      'settings' => "footer_brand_image_$i",
+    )));
+
+    // Brand Image Dark
+    $wp_customize->add_setting("footer_brand_image_dark_$i", array(
+      'default' => get_template_directory_uri() . "/assets/images/brands/brand-dark-0{$i}.svg",
+      'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "footer_brand_image_dark_$i", array(
+      'label' => __("Brand Image $i (Dark)", 'devdinos'),
+      'section' => 'footer_brands_section',
+      'settings' => "footer_brand_image_dark_$i",
+    )));
+
+    // Brand URL
+    $wp_customize->add_setting("footer_brand_url_$i", array(
+      'default' => '#',
+      'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control("footer_brand_url_$i", array(
+      'label' => __("Brand URL $i", 'devdinos'),
+      'section' => 'footer_brands_section',
+      'type' => 'url',
+    ));
+  }
 }
 add_action('customize_register', 'devdinos_customize_register');
 

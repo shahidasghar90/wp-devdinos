@@ -1228,77 +1228,75 @@
     </section>
     <!-- ====== Contact end ====== -->
     
-
-    <!-- ====== Brands Section Start -->
-    <section class="pb-20 dark:bg-dark">
+    <!-- ====== Brands footer Section Start -->
+    <?php if (get_theme_mod('footer_brands_section_show', 1)) : ?>
+    <section class="pb-20 bg-white dark:bg-dark">
       <div class="container px-4 mx-auto">
+                <div class="mb-12 text-center lg:mb-20">
+                    <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
+                      <?php echo esc_html(get_theme_mod('footer_brands_title', 'Built with latest technology')); ?>
+                    </h2>
+                </div>
         <div
           class="flex flex-wrap items-center justify-center gap-8 -mx-4 xl:gap-11"
         >
-          <a href="https://graygrids.com/">
-            <img
-              src="./assets/images/brands/graygrids.svg"
-              alt="graygrids"
-              class="dark:hidden"
-            />
-            <img
-              src="./assets/images/brands/graygrids-white.svg"
-              alt="graygrids"
-              class="hidden dark:block"
-            />
-          </a>
-          <a href="https://lineicons.com/">
-            <img
-              src="./assets/images/brands/lineicons.svg"
-              alt="lineicons"
-              class="dark:hidden"
-            />
-            <img
-              src="./assets/images/brands/lineicons-white.svg"
-              alt="graygrids"
-              class="hidden dark:block"
-            />
-          </a>
-          <a href="https://uideck.com/">
-            <img
-              src="./assets/images/brands/uideck.svg"
-              alt="uideck"
-              class="dark:hidden"
-            />
-            <img
-              src="./assets/images/brands/uideck-white.svg"
-              alt="graygrids"
-              class="hidden dark:block"
-            />
-          </a>
-          <a href="https://ayroui.com/">
-            <img
-              src="./assets/images/brands/ayroui.svg"
-              alt="ayroui"
-              class="dark:hidden"
-            />
-            <img
-              src="./assets/images/brands/ayroui-white.svg"
-              alt="graygrids"
-              class="hidden dark:block"
-            />
-          </a>
-          <a href="https://tailgrids.com/">
-            <img
-              src="./assets/images/brands/tailgrids.svg"
-              alt="tailgrids"
-              class="dark:hidden"
-            />
-            <img
-              src="./assets/images/brands/tailgrids-white.svg"
-              alt="graygrids"
-              class="hidden dark:block"
-            />
-          </a>
+          <?php
+          $default_brands = [
+            1 => [
+                'link' => '#',
+                'image' => get_template_directory_uri() . '/assets/images/brands/brand-01.svg',
+                'image_dark' => get_template_directory_uri() . '/assets/images/brands/brand-white-01.svg',
+            ],
+            2 => [
+                'link' => '#',
+                'image' => get_template_directory_uri() . '/assets/images/brands/brand-02.svg',
+                'image_dark' => get_template_directory_uri() . '/assets/images/brands/brand-white-02.svg',
+            ],
+            3 => [
+                'link' => '#',
+                'image' => get_template_directory_uri() . '/assets/images/brands/brand-03.svg',
+                'image_dark' => get_template_directory_uri() . '/assets/images/brands/brand-white-03.svgg',
+            ],
+            4 => [
+                'link' => '#',
+                'image' => get_template_directory_uri() . '/assets/images/brands/brand-04.svg',
+                'image_dark' => get_template_directory_uri() . '/assets/images/brands/brand-white-04.svg',
+            ],
+            5 => [
+                'link' => '#',
+                'image' => get_template_directory_uri() . '/assets/images/brands/brand-05.svg',
+                'image_dark' => get_template_directory_uri() . '/assets/images/brands/brand-white-05.svg',
+            ],
+          ];
+
+          for ($i = 1; $i <= 5; $i++) {
+            $image_url = get_theme_mod("footer_brand_image_$i", $default_brands[$i]['image']);
+            $image_dark_url = get_theme_mod("footer_brand_image_dark_$i", $default_brands[$i]['image_dark']);
+            $link_url = get_theme_mod("footer_brand_url_$i", $default_brands[$i]['link']);
+          ?>
+              <a href="<?php echo esc_url($link_url); ?>" class="block">
+                <img
+                  src="<?php echo esc_url($image_url); ?>"
+                  alt="brand"
+                  class="mx-auto dark:hidden"
+                  style="max-height: 40px;"
+                />
+                <img
+                  src="<?php echo esc_url($image_dark_url); ?>"
+                  alt="brand"
+                  class="hidden mx-auto dark:block"
+                  style="max-height: 40px;"
+                />
+              </a>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </section>
-    <!-- ====== Brands Section End -->
+    <?php endif; ?>
+    <!-- ====== Brands footer Section End -->
+
 
     <!-- ====== Footer Section Start -->
     <footer
@@ -1889,31 +1887,6 @@
     </a>
     <!-- ====== Back To Top End -->
 
-    <!-- ====== Made With Button Start -->
-    <a
-      target="_blank"
-      rel="nofollow noopener"
-      class="fixed bottom-8 left-4 z-999 inline-flex items-center gap-[10px] rounded-lg bg-white px-[14px] py-2 shadow-2 dark:bg-dark-2 sm:left-9"
-      href="https://tailgrids.com/"
-    >
-      <span class="text-base font-medium text-dark-3 dark:text-dark-6">
-        Made with
-      </span>
-      <span class="block w-px h-4 bg-stroke dark:bg-dark-3"></span>
-      <span class="block w-full max-w-[88px]">
-        <img
-          src="./assets/images/brands/tailgrids.svg"
-          alt="tailgrids"
-          class="dark:hidden"
-        />
-        <img
-          src="./assets/images/brands/tailgrids-white.svg"
-          alt="tailgrids"
-          class="hidden dark:block"
-        />
-      </span>
-    </a>
-    <!-- ====== Made With Button End -->
 
     <!-- ====== All Scripts -->
 
