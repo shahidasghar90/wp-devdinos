@@ -24,7 +24,14 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <!-- Navbar Section Start -->
-<div class="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header">
+<!-- <div class="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header"> -->
+    <div class="
+    <?php if (is_front_page()) {
+        echo 'absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header';
+    } else {
+        echo 'sticky top-0 left-0 z-40 flex items-center w-full bg-white ud-header';
+    } ?>
+">
     <div class="container px-4 mx-auto">
         <div class="relative flex items-center justify-between -mx-4">
             <div class="max-w-full px-4 w-60">

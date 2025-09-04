@@ -8,7 +8,7 @@ function devdinos_theme_enqueue_scripts() {
     wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
 
       $logo_urls = array(
-        'default' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-light.png',
+        'default' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png',
         'default_dark' => get_template_directory_uri() . '/assets/images/logo-devdinos-dark.png',
         'sticky' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png',
         'sticky_dark' => get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png'

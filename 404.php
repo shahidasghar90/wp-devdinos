@@ -10,6 +10,13 @@
 get_header();
 ?>
 
+    <!-- ==== WOW JS ==== -->
+    <script src="assets/js/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+  </head>
+
 <!-- ====== Banner Section Start -->
 <div
   class="relative z-10 overflow-hidden pb-[60px] pt-[120px] dark:bg-dark md:pt-[130px] lg:pt-[160px]"
@@ -123,6 +130,16 @@ get_header();
       </div>
     </section>
     <!-- ====== 404 Section End -->
+
+    <style>
+.main-navigation {
+    background-color: transparent !important;
+}
+.error-404-content {
+    text-align: center;
+    padding: 80px 20px;
+}
+    </style>
 
 <?php
 get_footer();
