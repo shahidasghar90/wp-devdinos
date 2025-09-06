@@ -98,6 +98,7 @@
           <?php endif; ?>
         </div>
       </div>
+</section>
     <!-- ====== FAQ Section end -->
 
     
