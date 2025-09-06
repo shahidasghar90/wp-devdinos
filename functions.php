@@ -82,6 +82,78 @@ add_action('after_setup_theme', 'devdinos_theme_support');
 
 
 function devdinos_customize_register($wp_customize) {
+    // Section for login button
+    $wp_customize->add_section('login_button_section', array(
+        'title' => __('Login Button Settings', 'devdinos'),
+        'priority' => 30,
+    ));
+
+    // Enable/Disable login button
+    $wp_customize->add_setting('login_button_enabled', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('login_button_enabled', array(
+        'label' => __('Enable Login Button', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'checkbox',
+    ));
+
+    // Login button text
+    $wp_customize->add_setting('login_button_text', array(
+        'default' => __('Sign In', 'devdinos'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('login_button_text', array(
+        'label' => __('Login Button Text', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'text',
+    ));
+
+    // Login button URL
+    $wp_customize->add_setting('login_button_url', array(
+        'default' => wp_login_url(),
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('login_button_url', array(
+        'label' => __('Login Button URL', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'url',
+    ));
+  
+     // Enable/Disable Sign Up button
+    $wp_customize->add_setting('signup_button_enabled', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('signup_button_enabled', array(
+        'label' => __('Enable Sign Up Button', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'checkbox',
+    ));
+
+    // Sign Up button text
+    $wp_customize->add_setting('signup_button_text', array(
+        'default' => __('Sign Up', 'devdinos'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('signup_button_text', array(
+        'label' => __('Sign Up Button Text', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'text',
+    ));
+
+    // Sign Up button URL
+    $wp_customize->add_setting('signup_button_url', array(
+        'default' => home_url('/signup.html'),
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('signup_button_url', array(
+        'label' => __('Sign Up Button URL', 'devdinos'),
+        'section' => 'login_button_section',
+        'type' => 'url',
+    ));
+  
   // Hero Section
   $wp_customize->add_section('hero_section', array(
     'title' => __('Hero Section', 'devdinos'),

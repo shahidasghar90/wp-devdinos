@@ -2,34 +2,36 @@
   "use strict";
 
   // ======= a function to update logo
-  function updateLogo() {
+function updateLogo() {
     const defaultLogo = document.querySelector(".header-logo");
     const ud_header = document.querySelector(".ud-header");
 
     // Check if logos are defined
     if (typeof devdinosLogos === 'undefined') {
-      return;
+        console.error("devdinosLogos is not defined");
+        return;
     }
 
     if (defaultLogo && ud_header) {
         const isDarkMode = document.documentElement.classList.contains("dark");
         const isSticky = ud_header.classList.contains("is-sticky");
 
+        let newSrc;
         if (isDarkMode) {
-            if (isSticky) {
-                defaultLogo.src = devdinosLogos.sticky_dark;
-            } else {
-                defaultLogo.src = devdinosLogos.default_dark;
-            }
-        } else { // Light mode
-            if (isSticky) {
-                defaultLogo.src = devdinosLogos.sticky;
-            } else {
-                defaultLogo.src = devdinosLogos.default;
-            }
+            newSrc = isSticky ? devdinosLogos.sticky_dark : devdinosLogos.default_dark;
+        } else {
+            newSrc = isSticky ? devdinosLogos.sticky : devdinosLogos.default;
         }
+
+        // Add error handling for image loading
+        defaultLogo.onerror = () => {
+            console.error(`Failed to load logo: ${newSrc}`);
+            // Optionally, set a fallback logo here
+            // defaultLogo.src = 'path/to/fallback-logo.png';
+        };
+        defaultLogo.src = newSrc;
     }
-  }
+}
 
   // ====== theme switcher
   const themeSwitcher = document.getElementById("themeSwitcher");
