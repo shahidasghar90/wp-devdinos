@@ -25,13 +25,7 @@
 <?php wp_body_open(); ?>
 <!-- Navbar Section Start -->
 <div class="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header">
-    <!-- <div class="
-    <?php if (is_front_page()) {
-        echo 'absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header';
-    } else {
-        echo 'sticky top-0 left-0 z-40 flex items-center w-full bg-white ud-header';
-    } ?>
-"> -->
+
     <div class="container px-4 mx-auto">
         <div class="relative flex items-center justify-between -mx-4">
             <div class="max-w-full px-4 w-60">
@@ -39,7 +33,7 @@
                     <?php if (has_custom_logo()) {
                         the_custom_logo();
                     } else { ?>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo/logo-devdinos-dark.png" alt="logo" class="w-full header-logo" />
+                        <img src="<?php echo get_template_directory_uri() . '/assets/images/logo/logo-devdinos-dark.png'; ?>" alt="logo" class="w-full header-logo" />
                     <?php } ?>
                 </a>
             </div>

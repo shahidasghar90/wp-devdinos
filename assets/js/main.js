@@ -86,37 +86,7 @@ function updateLogo() {
     });
   });
 
-  //section menu active
-  // function onScrollMenu() {
-  //   const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-  //   const pageLinks = document.querySelectorAll(".ud-menu-scroll");
-    
-  //   let activeLink = null;
-
-  //   pageLinks.forEach(link => {
-  //       const sectionId = link.getAttribute("href");
-  //       const section = document.querySelector(sectionId);
-  //       if (section) {
-  //           const sectionTop = section.offsetTop;
-  //           const sectionHeight = section.offsetHeight;
-  //           if (scrollPos >= sectionTop - 75 && scrollPos < sectionTop + sectionHeight - 75) {
-  //               activeLink = link;
-  //           }
-  //       }
-  //   });
-
-  //   pageLinks.forEach(link => {
-  //       if (link === activeLink) {
-  //           if (!link.classList.contains("active")) {
-  //               link.classList.add("active");
-  //           }
-  //       } else {
-  //           if (link.classList.contains("active")) {
-  //               link.classList.remove("active");
-  //           }
-  //       }
-  //   });
-  // }
+  // active menu on scroll
 
   window.addEventListener('scroll', function() {
     const header = document.querySelector('.ud-header');
@@ -128,6 +98,8 @@ function updateLogo() {
         header.classList.add('absolute', 'bg-transparent');
     }
 });
+
+
 
   // ====== scroll top js
   function scrollTo(element, to = 0, duration = 500) {

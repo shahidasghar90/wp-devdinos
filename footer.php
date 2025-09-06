@@ -11,7 +11,7 @@
             class="mb-6 inline-block max-w-[160px]"
           >
             <img
-              src="<?php echo esc_url(get_theme_mod('footer_logo', get_template_directory_uri() . '/assets/images/logo/logo-white.svg')); ?>"
+              src="<?php echo esc_url(get_theme_mod('footer_logo', get_template_directory_uri() . '/assets/images/logo/logo-devdinos-light.png')); ?>"
               alt="logo"
               class="max-w-full"
             />
@@ -212,7 +212,7 @@
             <p class="text-base text-gray-7">
               <?php echo esc_html(get_theme_mod('footer_copyright_text', 'Designed and Developed by')); ?>
               <a
-                href="<?php echo esc_url(get_theme_mod('footer_copyright_link_url', 'https://tailgrids.com')); ?>"
+                href="<?php echo esc_url(get_theme_mod('footer_copyright_link_url', '#')); ?>"
                 rel="nofollow noopener"
                 target="_blank"
                 class="text-gray-1 hover:underline"
