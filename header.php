@@ -131,13 +131,13 @@
               <div class="hidden sm:flex">
                 <?php if (get_theme_mod('login_button_enabled', true)) : ?>
                     <a href="<?php echo esc_url(get_theme_mod('login_button_url', wp_login_url())); ?>"
-                    class="loginBtn px-[22px] py-2 text-base font-medium text-dark hover:opacity-70 dark:text-white">
+                    class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
                     <?php echo esc_html(get_theme_mod('login_button_text', __('Sign In', 'devdinos'))); ?>
                     </a>
                 <?php endif; ?>
                 <?php if (get_theme_mod('signup_button_enabled', true)) : ?>
                     <a href="<?php echo esc_url(get_theme_mod('signup_button_url', '#')); ?>"
-                    class="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md signUpBtn bg-primary hover:bg-blue-dark">
+                    class="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-white/20 signUpBtn hover:bg-white/100 hover:text-dark">
                     <?php echo esc_html(get_theme_mod('signup_button_text', __('Sign Up', 'devdinos'))); ?>
                     </a>
                 <?php endif; ?>

@@ -1276,4 +1276,48 @@ function custom_post_type_faq() {
     register_post_type( 'faq', $args );
 }
 add_action( 'init', 'custom_post_type_faq', 0 );
+
+
+
+// Add a meta box for subtitle
+function devdinos_add_subtitle_meta_box() {
+    add_meta_box(
+        'devdinos_subtitle',
+        'Breadcrumb Subtitle',
+        'devdinos_subtitle_meta_box_callback',
+        'page',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'devdinos_add_subtitle_meta_box');
+
+function devdinos_subtitle_meta_box_callback($post) {
+    wp_nonce_field('devdinos_save_subtitle', 'devdinos_subtitle_nonce');
+    $value = get_post_meta($post->ID, '_devdinos_breadcrumb_subtitle', true);
+    echo '<input type="text" style="width:100%" id="devdinos_breadcrumb_subtitle" name="devdinos_breadcrumb_subtitle" value="' . esc_attr($value) . '" />';
+}
+
+// Save the subtitle meta field
+function devdinos_save_subtitle_meta_box_data($post_id) {
+    if (!isset($_POST['devdinos_subtitle_nonce'])) {
+        return;
+    }
+    if (!wp_verify_nonce($_POST['devdinos_subtitle_nonce'], 'devdinos_save_subtitle')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    if (!isset($_POST['devdinos_breadcrumb_subtitle'])) {
+        return;
+    }
+    $subtitle = sanitize_text_field($_POST['devdinos_breadcrumb_subtitle']);
+    update_post_meta($post_id, '_devdinos_breadcrumb_subtitle', $subtitle);
+}
+add_action('save_post', 'devdinos_save_subtitle_meta_box_data');
+
 ?>
