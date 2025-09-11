@@ -1317,7 +1317,188 @@ function devdinos_save_subtitle_meta_box_data($post_id) {
     }
     $subtitle = sanitize_text_field($_POST['devdinos_breadcrumb_subtitle']);
     update_post_meta($post_id, '_devdinos_breadcrumb_subtitle', $subtitle);
+
 }
 add_action('save_post', 'devdinos_save_subtitle_meta_box_data');
+
+function devdinos_widgets_init() {
+    register_sidebar( array(
+        'name'          => esc_html__( 'Sidebar', 'devdinos' ),
+        'id'            => 'sidebar-1',
+        'description'   => esc_html__( 'Add widgets here.', 'devdinos' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'devdinos_widgets_init' );
+
+
+
+
+// Add a meta box to the post editor
+function devdinos_add_comments_meta_box() {
+    add_meta_box(
+        'devdinos_comments_meta_box', // ID
+        'Comments Settings', // Title
+        'devdinos_comments_meta_box_html', // Callback
+        'post' // Post type
+    );
+}
+add_action('add_meta_boxes', 'devdinos_add_comments_meta_box');
+
+// HTML for the meta box
+function devdinos_comments_meta_box_html($post) {
+    $value = get_post_meta($post->ID, '_hide_comments', true);
+    wp_nonce_field('devdinos_save_comments_meta_box_data', 'devdinos_comments_meta_box_nonce');
+    ?>
+    <label for="hide_comments_field">Hide Comments Section</label>
+    <input type="checkbox" name="hide_comments_field" id="hide_comments_field" value="1" <?php checked($value, '1'); ?>>
+    <p class="description">Check this box to hide the comments section on this post.</p>
+    <?php
+}
+
+// Save the meta box data
+function devdinos_save_comments_meta_box_data($post_id) {
+    // Check if our nonce is set.
+    if (!isset($_POST['devdinos_comments_meta_box_nonce'])) {
+        return;
+    }
+
+    // Verify that the nonce is valid.
+    if (!wp_verify_nonce($_POST['devdinos_comments_meta_box_nonce'], 'devdinos_save_comments_meta_box_data')) {
+        return;
+    }
+
+    // If this is an autosave, our form has not been submitted, so we don't want to do anything.
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Check the user's permissions.
+    if (isset($_POST['post_type']) && 'post' == $_POST['post_type']) {
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+    }
+
+    // Sanitize user input and save as '1' for checked, '0' for unchecked.
+    $new_hide_comments_value = (isset($_POST['hide_comments_field']) && $_POST['hide_comments_field'] == '1') ? '1' : '0';
+
+    // Update the meta field in the database.
+    update_post_meta($post_id, '_hide_comments', $new_hide_comments_value);
+}
+add_action('save_post', 'devdinos_save_comments_meta_box_data');
+
+
+/**
+ * Style the comment form fields.
+ */
+function devdinos_style_comment_form_fields($fields) {
+    $commenter = wp_get_current_commenter();
+    $req       = get_option('require_name_email');
+    $aria_req  = ($req ? " aria-required='true'" : '');
+
+    $fields['author'] =
+        '<div class="w-full md:w-1/2 px-2 mb-4">' .
+        '<label for="author" class="block mb-1 text-dark dark:text-white">' . __('Name') . ($req ? ' <span class="required">*</span>' : '') . '</label>' .
+        '<input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30" maxlength="245"' . $aria_req . ' class="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary" />' .
+        '</div>';
+
+    $fields['email'] =
+        '<div class="w-full md:w-1/2 px-2 mb-4">' .
+        '<label for="email" class="block mb-1 text-dark dark:text-white">' . __('Email') . ($req ? ' <span class="required">*</span>' : '') . '</label>' .
+        '<input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . ' class="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary" />' .
+        '</div>';
+
+    $fields['url'] =
+        '<div class="w-full px-2 mb-4">' .
+        '<label for="url" class="block mb-1 text-dark dark:text-white">' . __('Website') . '</label>' .
+        '<input id="url" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" maxlength="200" class="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary" />' .
+        '</div>';
+
+    return $fields;
+}
+add_filter('comment_form_default_fields', 'devdinos_style_comment_form_fields');
+
+/**
+ * Style the main comment form container and button.
+ */
+function devdinos_style_comment_form($defaults) {
+    $defaults['comment_field'] =
+        '<div class="w-full px-2 mb-4">' .
+        '<label for="comment" class="block mb-1 text-dark dark:text-white">' . _x('Comment', 'noun') . '</label>' .
+        '<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required" class="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"></textarea>' .
+        '</div>';
+
+    // Wrap fields in a flex container
+    $defaults['fields'] = '<div class="flex flex-wrap -mx-2">' . implode('', $defaults['fields']) . '</div>';
+
+    // Style the submit button
+    $defaults['class_submit'] = 'cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90';
+
+    return $defaults;
+}
+add_filter('comment_form_defaults', 'devdinos_style_comment_form');
+
+
+/**
+ * Custom comment walker.
+ */
+class DevDinos_Comment_Walker extends Walker_Comment {
+    /**
+     * Starts the element output.
+     */
+    public function start_el(&$output, $comment, $depth = 0, $args = array(), $id = 0) {
+        $depth++;
+        $GLOBALS['comment_depth'] = $depth;
+        $GLOBALS['comment'] = $comment;
+
+        ?>
+        <li <?php comment_class('mb-6'); ?> id="comment-<?php comment_ID(); ?>">
+            <article class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                    <?php echo get_avatar($comment, 60, '', '', ['class' => 'rounded-full']); ?>
+                </div>
+                <div class="flex-grow">
+                    <div class="mb-2">
+                        <div class="flex items-center gap-4">
+                            <h4 class="text-lg font-bold text-dark dark:text-white"><?php echo get_comment_author_link(); ?></h4>
+                            <span class="text-sm text-body-color dark:text-dark-6"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()); ?></span>
+                        </div>
+                    </div>
+                    <div class="prose dark:prose-invert max-w-none">
+                        <?php if ('0' == $comment->comment_approved) : ?>
+                            <p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.'); ?></p>
+                        <?php endif; ?>
+                        <?php comment_text(); ?>
+                    </div>
+                    <div class="mt-2">
+                        <?php
+                        comment_reply_link(array_merge($args, array(
+                            'add_below' => 'comment',
+                            'depth'     => $depth,
+                            'max_depth' => $args['max_depth'],
+                            'before'    => '<div class="reply">',
+                            'after'     => '</div>',
+                            'class'     => 'text-sm font-medium text-primary hover:text-opacity-90'
+                        )));
+                        ?>
+                    </div>
+                </div>
+            </article>
+        <?php
+    }
+
+    /**
+     * Ends the element output.
+     */
+    public function end_el(&$output, $comment, $depth = 0, $args = array()) {
+        ?>
+        </li><!-- #comment-## -->
+        <?php
+    }
+}
 
 ?>
