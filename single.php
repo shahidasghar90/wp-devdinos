@@ -78,16 +78,61 @@ get_header();
                         <div class="flex relative">   
                             <div class="entry-content">
                                 <?php the_content(); ?> 
-                            </div><!-- .entry-content -->    
+                            </div><!-- .entry-content -->                           
                                 <div class="w-full lg:w-4/12 px-4">
                                     <?php get_sidebar(); ?>
                                 </div>
                         </div>
                     </article><!-- #post-<?php the_ID(); ?> -->
                 <?php endwhile; // End of the loop. ?>
-
+                
             </div>        
         </div>
+
+        <!--  Tags and Share Section -->
+         <div class="flex flex-wrap items-center mb-12 -mx-4 mt-8">
+                    <div class="w-full px-4 md:w-1/2">
+                        <div class="flex flex-wrap items-center gap-3 mb-8 wow fadeInUp md:mb-0" data-wow-delay=".1s">
+                            <?php
+                            $tags = get_the_tags();
+                            if ($tags) {
+                                foreach ($tags as $tag) {
+                                    echo '<a href="' . get_tag_link($tag->term_id) . '" class="block rounded-md bg-primary/[0.08] px-[14px] py-[5px] text-base text-dark hover:bg-primary hover:text-white dark:text-white">' . $tag->name . '</a>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2">
+                        <div class="flex items-center wow fadeInUp md:justify-end" data-wow-delay=".1s">
+                            <span class="mr-5 text-sm font-medium text-body-color dark:text-dark-6">
+                                Share This Post
+                            </span>
+                            <div class="flex items-center gap-[10px]">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#1877F2"/>
+                                        <path d="M17 15.5399V12.7518C17 11.6726 17.8954 10.7976 19 10.7976H21V7.86631L18.285 7.67682C15.9695 7.51522 14 9.30709 14 11.5753V15.5399H11V18.4712H14V24.3334H17V18.4712H20L21 15.5399H17Z" fill="white"/>
+                                    </svg>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>" target="_blank">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#55ACEE"/>
+                                        <path d="M24.2945 11.375C24.4059 11.2451 24.2607 11.0755 24.0958 11.1362C23.728 11.2719 23.3918 11.3614 22.8947 11.4166C23.5062 11.0761 23.7906 10.5895 24.0219 9.99339C24.0777 9.84961 23.9094 9.71915 23.7645 9.78783C23.1759 10.0669 22.5408 10.274 21.873 10.3963C21.2129 9.7421 20.272 9.33331 19.2312 9.33331C17.2325 9.33331 15.6117 10.8406 15.6117 12.6993C15.6117 12.9632 15.6441 13.2202 15.7051 13.4663C12.832 13.3324 10.2702 12.1034 8.49031 10.2188C8.36832 10.0897 8.14696 10.1068 8.071 10.2643C7.86837 10.6846 7.7554 11.1509 7.7554 11.6418C7.7554 12.8093 8.39417 13.8395 9.36518 14.4431C8.92981 14.4301 8.51344 14.3452 8.12974 14.2013C7.94292 14.1312 7.72877 14.2543 7.75387 14.4427C7.94657 15.8893 9.11775 17.0827 10.6295 17.3647C10.3259 17.442 10.0061 17.483 9.67537 17.483C9.59517 17.483 9.51567 17.4805 9.43688 17.4756C9.23641 17.4632 9.07347 17.6426 9.15942 17.8141C9.72652 18.946 10.951 19.7361 12.376 19.7607C11.1374 20.6637 9.57687 21.2017 7.88109 21.2017C7.672 21.2017 7.5823 21.4706 7.7678 21.5617C9.20049 22.266 10.832 22.6666 12.5656 22.6666C19.2231 22.6666 22.8631 17.5377 22.8631 13.0896C22.8631 12.944 22.8594 12.7984 22.8528 12.6542C23.3932 12.2911 23.8789 11.8595 24.2945 11.375Z" fill="white"/>
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>&title=<?php the_title(); ?>" target="_blank">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#007AB9"/>
+                                        <path d="M11.7836 10.1666C11.7833 10.8452 11.3716 11.4559 10.7426 11.7106C10.1137 11.9654 9.39306 11.8134 8.92059 11.3263C8.44811 10.8392 8.31813 10.1143 8.59192 9.49341C8.86572 8.87251 9.48862 8.4796 10.1669 8.49996C11.0678 8.527 11.784 9.26533 11.7836 10.1666ZM11.8999 13H8.3999V23H11.8999V13ZM19.3999 12.75C17.7999 12.75 16.8 13.53 16.3 14.25V13H12.9V23H16.4V17.5C16.4 16.15 16.9 15.25 18.15 15.25C19.25 15.25 19.9 16 19.9 17.5V23H23.4V17.25C23.4 14.5 21.4 12.75 19.3999 12.75Z" fill="white"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        <!--  Tags and Share Section End-->
          <div class="flex flex-wrap justify-center -mx-4">
             <div class="w-full lg:w-8/12 px-4">
                 <footer class="entry-footer mt-8">
@@ -128,6 +173,82 @@ get_header();
                 </footer><!-- .entry-footer -->
             </div>
         </div>
+         <div class="flex flex-wrap -mx-4">
+                    <div class="w-full px-4 wow fadeInUp mt-14" data-wow-delay=".2s">
+                        <h2 class="relative pb-5 text-2xl font-semibold text-dark dark:text-white sm:text-[36px]">
+                            Related Articles
+                        </h2>
+                        <span class="mb-10 inline-block h-[2px] w-20 bg-primary"></span>
+                    </div>
+
+                    <?php
+                    $related_args = array(
+                        'post_type'      => 'post',
+                        'posts_per_page' => 3,
+                        'post__not_in'   => array( get_the_ID() ),
+                        'tax_query'      => array(
+                            'relation' => 'OR',
+                            array(
+                                'taxonomy' => 'category',
+                                'field'    => 'term_id',
+                                'terms'    => wp_get_post_categories( get_the_ID(), array( 'fields' => 'ids' ) ),
+                            ),
+                            array(
+                                'taxonomy' => 'post_tag',
+                                'field'    => 'term_id',
+                                'terms'    => wp_get_post_tags( get_the_ID(), array( 'fields' => 'ids' ) ),
+                            ),
+                        ),
+                    );
+
+                    $related_query = new WP_Query( $related_args );
+
+                    if ( $related_query->have_posts() ) :
+                        while ( $related_query->have_posts() ) : $related_query->the_post();
+                    ?>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                        <div class="mb-10 wow fadeInUp group" data-wow-delay=".1s">
+                            <div class="mb-8 overflow-hidden rounded-[5px]">
+                                <a href="<?php the_permalink(); ?>" class="block">
+                                    <?php if ( has_post_thumbnail() ) : ?>
+                                        <img
+                                            src="<?php the_post_thumbnail_url('large'); ?>"
+                                            alt="<?php the_title_attribute(); ?>"
+                                            class="w-full transition group-hover:rotate-6 group-hover:scale-125"
+                                        />
+                                    <?php else: ?>
+                                        <img
+                                            src="https://via.placeholder.com/400x250"
+                                            alt="placeholder"
+                                            class="w-full transition group-hover:rotate-6 group-hover:scale-125"
+                                        />
+                                    <?php endif; ?>
+                                </a>
+                            </div>
+                            <div>
+                                <span class="mb-6 inline-block rounded-[5px] bg-primary px-4 py-0.5 text-center text-xs font-medium leading-loose text-white">
+                                    <?php echo get_the_date(); ?>
+                                </span>
+                                <h3>
+                                    <a
+                                        href="<?php the_permalink(); ?>"
+                                        class="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
+                                    >
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h3>
+                                <!-- <div class="max-w-[370px] text-base text-body-color dark:text-dark-6">
+                                    <?php the_excerpt(); ?>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
+                </div>
     </div>
 </section>
 <!-- ====== Blog Details Section End -->
