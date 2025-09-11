@@ -75,16 +75,18 @@ get_header();
                                 </div>
                             </div>
                         <?php endif; ?>
-                            
-                        <div class="entry-content">
-                            <?php the_content(); ?>  
-                        </div><!-- .entry-content -->
-                            </article><!-- #post-<?php the_ID(); ?> -->
+                        <div class="flex relative">   
+                            <div class="entry-content">
+                                <?php the_content(); ?> 
+                            </div><!-- .entry-content -->    
+                                <div class="w-full lg:w-4/12 px-4">
+                                    <?php get_sidebar(); ?>
+                                </div>
+                        </div>
+                    </article><!-- #post-<?php the_ID(); ?> -->
                 <?php endwhile; // End of the loop. ?>
-            </div>
-            <div class="w-full lg:w-4/12 px-4">
-                <?php get_sidebar(); ?>
-            </div>
+
+            </div>        
         </div>
          <div class="flex flex-wrap justify-center -mx-4">
             <div class="w-full lg:w-8/12 px-4">
