@@ -2773,3 +2773,7 @@
   inherits: false;
   initial-value: 1;
 }
+
+.ud-header:not(.sticky) {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 55px 36px -28px inset;
+}
