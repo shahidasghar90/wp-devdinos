@@ -65,6 +65,13 @@ layer(base);
   }
 }
 
+<<<<<<< HEAD
+=======
+.ud-header:not(.sticky) {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 55px 36px -28px inset;
+}
+
+>>>>>>> 94d913e1fd8179c16d695797aeb782fb67632b97
 .sticky {
   @apply fixed transition z-9999 bg-white/80 dark:bg-dark/80;
   backdrop-filter: blur(5px);
