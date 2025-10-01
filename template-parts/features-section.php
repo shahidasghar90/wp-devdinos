@@ -33,10 +33,10 @@
               ?>
           </div>
           <h4 class="mb-3 text-xl font-bold text-dark dark:text-white">
-             <?php echo esc_html(get_theme_mod('feature_title_' . $i, 'Feature ' . $i)); ?>
+             <?php echo esc_html(get_theme_mod('feature_title_' . $i, 'Full-Stack Development ' . $i)); ?>
           </h4>
           <p class="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
-            <?php echo esc_html(get_theme_mod('feature_description_' . $i, 'Lorem Ipsum is simply dummy text of the printing and industry.')); ?>
+            <?php echo esc_html(get_theme_mod('feature_description_' . $i, 'We offer comprehensive website development, covering both the front-end and back-end.')); ?>
           </p>
            <a href="<?php echo esc_url(get_theme_mod('feature_link_' . $i, '#')); ?>" class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary">
               Learn More
