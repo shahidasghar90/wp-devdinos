@@ -1,0 +1,12 @@
+/*
+Theme Name: devdinos
+Theme URI: https://devdinos.com/
+Author: Your Name
+Author URI: https://example.com/
+Description: A custom theme for devdinos.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: devdinos
+*/
+@import url('assets/css/tailwind.css'); /* Link to your final compiled Tailwind CSS */
