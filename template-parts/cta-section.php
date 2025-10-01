@@ -17,13 +17,13 @@
                 <p
                   class="mx-auto mb-6 max-w-[515px] text-base leading-[1.5] text-white"
                 >
-                  <?php echo get_theme_mod('cta_description', 'There are many variations of passages of Lorem Ipsum but the majority have suffered in some form.'); ?>
+                  <?php echo get_theme_mod('cta_description', 'Let’s create something extraordinary together! Whether its a custom website or a powerful e-commerce platform, our team is here to turn your ideas into reality.'); ?>
                 </p>
                 <a
                   href="<?php echo get_theme_mod('cta_button_url', 'javascript:void(0)'); ?>"
                   class="inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-[#0BB489]"
                 >
-                  <?php echo get_theme_mod('cta_button_text', 'Start using Play'); ?>
+                  <?php echo get_theme_mod('cta_button_text', 'Book Your Consultation Now!'); ?>
                 </a>
               </div>
             </div>

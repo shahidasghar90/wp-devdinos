@@ -16,7 +16,7 @@
               <p
                 class="mx-auto max-w-[485px] text-base text-body-color dark:text-dark-6"
               >
-                <?php echo get_theme_mod('faq_section_description', 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.'); ?>
+                <?php echo get_theme_mod('faq_section_description', 'Browse through our frequently asked questions to find the information you need or reach out to us directly for more details.'); ?>
               </p>
             </div>
           </div>

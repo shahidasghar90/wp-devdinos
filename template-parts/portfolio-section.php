@@ -6,7 +6,7 @@
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
-            <div class="mx-auto mb-[60px] max-w-[510px] text-center">
+            <div class="mx-auto mb-[60px] max-w-[514px] text-center">
               <span class="mb-2 block text-lg font-semibold text-primary">
                 <?php echo get_theme_mod('portfolio_subtitle', 'Our Portfolio'); ?>
               </span>
@@ -14,7 +14,7 @@
                 <?php echo get_theme_mod('portfolio_title', 'Our Recent Projects'); ?>
               </h2>
               <p class="text-base text-body-color dark:text-dark-6">
-                <?php echo get_theme_mod('portfolio_description', 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.'); ?>
+                <?php echo get_theme_mod('portfolio_description', 'Take a look at some of the projects we have brought to life. Each project is a testament to our commitment to quality, creativity, and client satisfaction. From intricate web applications to visually stunning websites, our portfolio showcases the breadth and depth of our capabilities.'); ?>
               </p>
             </div>
           </div>

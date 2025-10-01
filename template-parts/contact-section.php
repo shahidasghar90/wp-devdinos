@@ -43,7 +43,7 @@
                       Our Location
                     </h5>
                     <p class="text-base text-body-color dark:text-dark-6">
-                      <?php echo get_theme_mod('contact_location', '401 Broadway, 24th Floor, Orchard Cloud View, London'); ?>
+                      <?php echo get_theme_mod('contact_location', 'I/8-1 Islamabad, 44070 Pakistan '); ?>
                     </p>
                   </div>
                 </div>
@@ -67,10 +67,10 @@
                       How Can We Help?
                     </h5>
                     <p class="text-base text-body-color dark:text-dark-6">
-                      <?php echo get_theme_mod('contact_email_1', 'info@yourdomain.com'); ?>
+                      <?php echo get_theme_mod('contact_email_1', 'info at devdinos.com'); ?>
                     </p>
                     <p class="mt-1 text-base text-body-color dark:text-dark-6">
-                      <?php echo get_theme_mod('contact_email_2', 'contact@yourdomain.com'); ?>
+                      <?php echo get_theme_mod('contact_email_2', 'contact at devdinos.com'); ?>
                     </p>
                   </div>
                 </div>

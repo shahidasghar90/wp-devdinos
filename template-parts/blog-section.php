@@ -13,7 +13,7 @@
                 <?php echo get_theme_mod('blog_title', 'Our Recent News'); ?>
               </h2>
               <p class="text-base text-body-color dark:text-dark-6">
-                <?php echo get_theme_mod('blog_description', 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.'); ?>
+                <?php echo get_theme_mod('blog_description', 'Explore our blog for expert advice, industry news, and valuable resources to help you succeed online.'); ?>
               </p>
             </div>
           </div>

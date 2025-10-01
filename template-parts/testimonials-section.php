@@ -10,7 +10,7 @@
                 <?php echo esc_html(get_theme_mod('testimonial_title', 'What our Clients Say')); ?>
               </h2>
               <p class="text-base text-body-color dark:text-dark-6">
-                <?php echo wp_kses_post(get_theme_mod('testimonial_description', 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.')); ?>
+                <?php echo wp_kses_post(get_theme_mod('testimonial_description', 'Don’t just take our word for it, see what our clients say! We’re known for delivering exceptional results and building strong, lasting partnerships."')); ?>
               </p>
             </div>
           </div>
