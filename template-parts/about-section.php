@@ -10,12 +10,12 @@
                 <h2
                   class="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
                 >
-                  <?php echo get_theme_mod('about_title', 'Brilliant Toolkit to Build Nextgen Website Faster.'); ?>
+                  <?php echo get_theme_mod('about_title', 'A Study of Creativity'); ?>
                 </h2>
                 <p
                   class="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
-                <?php echo get_theme_mod('about_description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero.'); ?>
+                <?php echo get_theme_mod('about_description', 'Creativity is at the heart of everything we do. Our approach to web development is not just about writing code; its about creating beautiful, intuitive, and effective digital experiences. We believe in pushing the boundaries of whats possible and delivering solutions that are as innovative as they are functional.'); ?>
                 </p>
 
                 <a
@@ -36,7 +36,7 @@
                     <?php
                       $about_image_1 = get_theme_mod('about_image_1');
                       if (empty($about_image_1)) {
-                        $about_image_1 = get_template_directory_uri() . '/assets/images/about/about-image-01.jpg';
+                        $about_image_1 = get_template_directory_uri() . '/assets/images/about/about-image-01.svg';
                       }
                     ?>
                     <img
@@ -54,7 +54,7 @@
                     <?php
                       $about_image_2 = get_theme_mod('about_image_2');
                       if (empty($about_image_2)) {
-                        $about_image_2 = get_template_directory_uri() . '/assets/images/about/about-image-02.jpg';
+                        $about_image_2 = get_template_directory_uri() . '/assets/images/about/about-image-02.svg';
                       }
                     ?>
                     <img
