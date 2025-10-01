@@ -45,14 +45,42 @@
                         <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
                     </button>
                     <nav id="navbarCollapse" class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6">
-                        <?php
-                        wp_nav_menu(array(
-                            'theme_location' => 'primary',
-                            'menu_class' => 'block lg:flex 2xl:ml-20',
-                            'container' => false,
-                        ));
-                        ?>
-                    </nav>
+                      <?php
+                      if (has_nav_menu('primary')) {
+                          wp_nav_menu(array(
+                              'theme_location' => 'primary',
+                              'menu_class' => 'block lg:flex 2xl:ml-20 space-x-4', // Added space-x-4 here
+                              'container' => false,
+                          ));
+                      } else {
+                      ?>
+                          <ul class="block lg:flex 2xl:ml-20 space-x-4"> <!-- Added space-x-4 here -->
+                              <li class="lg:mr-50">
+                                  <a href="#home" class="flex py-2 text-base font-medium text-dark lg:inline-flex lg:py-6 lg:text-white lg:group-hover:text-primary lg:group-hover:opacity-70">
+                                      Home
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#features" class="flex py-2 text-base font-medium text-dark lg:inline-flex lg:py-6 lg:text-white lg:group-hover:text-primary lg:group-hover:opacity-70">
+                                      Features
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#about" class="flex py-2 text-base font-medium text-dark lg:inline-flex lg:py-6 lg:text-white lg:group-hover:text-primary lg:group-hover:opacity-70">
+                                      About
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#contact" class="flex py-2 text-base font-medium text-dark lg:inline-flex lg:py-6 lg:text-white lg:group-hover:text-primary lg:group-hover:opacity-70">
+                                      Contact
+                                  </a>
+                              </li>
+                          </ul>
+                      <?php
+                      }
+                      ?>
+                  </nav>
+
                 </div>
 
                 <div class="flex items-center justify-end pr-16 lg:pr-0">
