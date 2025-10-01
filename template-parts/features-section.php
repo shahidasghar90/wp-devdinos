@@ -2,14 +2,14 @@
   <div id="features" class="container px-4 mx-auto">
     <div class="flex flex-wrap -mx-4">
       <div class="w-full px-4">
-        <div class="mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]">
+        <div class="mx-auto mb-12 max-w-[490px] text-center lg:mb-[70px]">
           <span class="block mb-2 text-lg font-semibold text-primary">
             <?php echo get_theme_mod('features_main_title', 'Features'); ?>
           </span>
           <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
-            <?php echo get_theme_mod('features_main_subtitle', 'Main Features Of Play'); ?>
+            <?php echo get_theme_mod('features_main_subtitle', 'Our Awesome Features of DevDinos'); ?>
           </h2>
-          <?php echo get_theme_mod('features_main_description', 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.'); ?>
+          <?php echo get_theme_mod('features_main_description', 'At Devdeinos, we specialize in delivering top-notch web development solutions tailored to meet your business needs. From dynamic websites and e-commerce platforms to custom web applications and responsive designs, our expert team combines innovative technologies with creative design to bring your vision to life. Whether you’re looking to enhance your online presence or build a robust digital solution from scratch, we’re here to help you succeed in the digital landscape.'); ?>
         </div>
       </div>
     </div>
