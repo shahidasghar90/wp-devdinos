@@ -210,14 +210,14 @@
         <div class="w-full px-4 md:w-1/3 lg:w-1/2">
           <div class="flex justify-center my-1 md:justify-end">
             <p class="text-base text-gray-7">
-              <?php echo esc_html(get_theme_mod('footer_copyright_text', 'Designed and Developed by')); ?>
+              <?php echo esc_html(get_theme_mod('footer_copyright_text', 'Developed by')); ?>
               <a
-                href="<?php echo esc_url(get_theme_mod('footer_copyright_link_url', '#')); ?>"
+                href="<?php echo esc_url(get_theme_mod('footer_copyright_link_url', 'https://devdinos.com/')); ?>"
                 rel="nofollow noopener"
                 target="_blank"
                 class="text-gray-1 hover:underline"
               >
-                <?php echo esc_html(get_theme_mod('footer_copyright_link_text', 'TailGrids and UIdeck')); ?>
+                <?php echo esc_html(get_theme_mod('footer_copyright_link_text', 'Wordpress Theme DevDions')); ?>
               </a>
             </p>
           </div>
